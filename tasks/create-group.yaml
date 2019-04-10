@@ -1,0 +1,7 @@
+---
+# file: ansible-role-common/tasks/create-group.yaml
+- name: Create new user group
+  group:
+    name: "{{ ansible_new_user_group }}"
+    gid: "{{ ansible_new_gid }}"
+    state: present

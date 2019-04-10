@@ -1,0 +1,12 @@
+---
+# file: ansible-role-common/tasks/main.yaml
+
+- include: create-group.yaml
+  become: true
+- include: create-new-ansible-user.yaml
+  become: true
+- include: add-ssh-key-auth-file.yaml
+  become: true
+- include: push-sshd_config.yaml
+  tags:
+    - pushKey

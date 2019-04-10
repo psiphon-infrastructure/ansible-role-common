@@ -1,0 +1,10 @@
+---
+# file: roles/ansible-role-common/defaults/main.yaml
+setup_user: user
+ansible_new_user: ansible-user
+ansible_new_uid: 999
+ansible_new_user_group: ansible-user
+ansible_new_gid: 999
+ansible_new_user_password: "{{ vault_new_user_password }}"
+base_path: "{{ ansible_env['PWD'] }}"
+ansible_key_file_name: ansible_id_ecdsa

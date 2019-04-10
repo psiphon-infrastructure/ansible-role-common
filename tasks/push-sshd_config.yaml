@@ -1,0 +1,5 @@
+---
+# file: ansible-role-common/tasks/push-sshd_config.yaml
+- name: Push sshd_config
+  template:
+    src="sshd_config.j2" dest="/tmp/sshd_config.new" backup=yes

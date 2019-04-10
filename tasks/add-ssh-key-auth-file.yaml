@@ -1,0 +1,7 @@
+---
+# file: ansible-role-common/tasks/add-ssh-key-auth-file.yaml
+- name: Add ssh key to authorized_keys file
+  authorized_key:
+    user: "{{ ansible_new_user }}"
+    state: present
+    key: "{{ lookup('file', './.ssh/{{ ansible_key_file_name }}.pub') }}"

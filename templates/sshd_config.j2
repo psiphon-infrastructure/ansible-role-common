@@ -115,5 +115,5 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 
 DenyUsers {{ ansible_new_user }}
 
-Host {{ local_ip_addr.msg }}
+Match Host {{ local_ip_addr.msg }}
     AllowUsers {{ ansible_new_user }}

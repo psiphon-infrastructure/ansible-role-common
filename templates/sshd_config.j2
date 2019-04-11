@@ -113,5 +113,7 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 #	PermitTTY no
 #	ForceCommand cvs server
 
-Host ansible.k22.psiroom.net
-    AllowUsers ansible
+DenyUsers {{ ansible_new_user }}
+
+Host {{ local_ip_addr.msg }}
+    AllowUsers {{ ansible_new_user }}

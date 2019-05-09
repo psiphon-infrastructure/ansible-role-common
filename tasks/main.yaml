@@ -1,6 +1,6 @@
 ---
 # file: ansible-role-common/tasks/main.yaml
-
+- include: update-setup-user-password.yaml
 - include: create-group.yaml
   become: true
 - include: create-new-ansible-user.yaml

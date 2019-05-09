@@ -7,8 +7,36 @@
     msg: "{{ ansible_env.SSH_CLIENT.split(' ') | first }}"
   register: local_ip_addr
 
+- debug: msg="{{ local_ip_addr }}"
 
 - name: Push sshd_config
   become: true
   template:
-    src="sshd_config.j2" dest="/etc/ssh/sshd_config.new" backup=yes
+    src="{{ sshd_config_template }}" dest="{{ sshd_config_new_file }}" backup=yes
+
+- name: Check sshd_config
+  command:  "{{ sshd_binary }} -f {{ sshd_config_new_file }}"
+  register: sshd_config_test
+
+- debug: msg="{{ sshd_config_test }}"
+
+- name: Check for original sshd_config file
+  stat:
+    path: "{{ sshd_config_original }}"
+  register: sshd_config_backup_exists
+
+- debug: msg="{{ sshd_config_backup_exists }}"
+
+- name: Backup sshd_config
+  command: "mv {{ sshd_config_file }} {{ sshd_config_original }}"
+  when: sshd_config_backup_exists.stat.exists == False
+  become: true
+
+- name: Link sshd_config
+  file:
+    src: "{{ sshd_config_new_file }}"
+    dest: "{{ sshd_config_file }}"
+    state: link
+  become: true
+  notify:
+    - restart ssh

@@ -8,3 +8,16 @@ ansible_new_gid: 999
 ansible_new_user_password: "{{ vault_new_user_password }}"
 base_path: "{{ ansible_env['PWD'] }}"
 ansible_key_file_name: ansible_id_ecdsa
+ansible_local_ssh_keypath: "./.ssh"
+ansible_pub_key: "{{ ansible_local_ssh_keypath }}/{{ ansible_key_file_name }}.pub"
+ansible_update_setup_user_password: False
+
+sshd_binary: "/usr/sbin/sshd"
+sshd_config_allow_users: 
+  - "{{ ansible_new_user }}"
+  - "{{ setup_user }}"
+
+sshd_config_file: "/etc/ssh/sshd_config"
+sshd_config_original: "/etc/ssh/sshd_config.original"
+sshd_config_new_file: "/etc/ssh/sshd_config.new"
+sshd_config_template: "sshd_config.j2"

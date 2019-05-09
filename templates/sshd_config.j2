@@ -43,7 +43,7 @@ PermitRootLogin no
 #IgnoreRhosts yes
 
 # To disable tunneled clear text passwords, change to no here!
-#PasswordAuthentication yes
+PasswordAuthentication no
 #PermitEmptyPasswords no
 
 # Change to yes to enable challenge-response passwords (beware issues with
@@ -76,7 +76,7 @@ UsePAM yes
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-X11Forwarding yes
+X11Forwarding no
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
@@ -113,7 +113,11 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 #	PermitTTY no
 #	ForceCommand cvs server
 
-DenyUsers {{ ansible_new_user }}
+AllowUsers {{ sshd_config_allow_users | join(' ') }}
 
-Match Host {{ local_ip_addr.msg }}
-    AllowUsers {{ ansible_new_user }}
+Match User {{ ansible_new_user }}
+	PasswordAuthentication no
+
+Match User {{ setup_user }}
+	PasswordAuthentication yes
+

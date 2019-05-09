@@ -1,0 +1,7 @@
+---
+# file: ansible-role-common/handlers/main.yaml
+- name: restart ssh
+  service:
+    name: ssh.service
+    state: restarted
+  become: true

@@ -7,6 +7,8 @@
   become: true
 - include: add-ssh-key-auth-file.yaml
   become: true
+  tags:
+    - push_ssh_key
 - include: push-sshd_config.yaml
   tags:
-    - pushKey
+    - push_sshd_config

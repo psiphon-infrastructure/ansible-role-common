@@ -5,9 +5,12 @@
   become: false
   debug:
     msg: "{{ ansible_env.SSH_CLIENT.split(' ') | first }}"
+    verbosity: 2
   register: local_ip_addr
 
-- debug: msg="{{ local_ip_addr }}"
+- debug: 
+    msg: "{{ local_ip_addr }}"
+    verbosity: 2
 
 - name: Push sshd_config
   become: true
@@ -18,14 +21,18 @@
   command:  "{{ sshd_binary }} -f {{ sshd_config_new_file }}"
   register: sshd_config_test
 
-- debug: msg="{{ sshd_config_test }}"
+- debug: 
+    msg: "{{ sshd_config_test }}"
+    verbosity: 2
 
 - name: Check for original sshd_config file
   stat:
     path: "{{ sshd_config_original }}"
   register: sshd_config_backup_exists
 
-- debug: msg="{{ sshd_config_backup_exists }}"
+- debug: 
+    msg: "{{ sshd_config_backup_exists }}"
+    verbosity: 2
 
 - name: Backup sshd_config
   command: "mv {{ sshd_config_file }} {{ sshd_config_original }}"

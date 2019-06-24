@@ -4,5 +4,5 @@
   authorized_key:
     user: "{{ ansible_new_user }}"
     state: present
-    key: "{{ lookup('file', './.ssh/{{ ansible_key_file_name }}.pub') }}"
+    key: "{{ lookup('file', '{{ ansible_pub_key }}') }}"
     comment: "{{ lookup('file','/etc/hostname') }}"

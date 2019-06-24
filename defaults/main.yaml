@@ -9,6 +9,7 @@ ansible_new_user_password: "{{ vault_new_user_password }}"
 base_path: "{{ ansible_env['PWD'] }}"
 ansible_key_file_name: ansible_id_ecdsa
 ansible_local_ssh_keypath: "./.ssh"
+ansible_key_file: "{{ ansible_local_ssh_keypath }}/{{ ansible_key_file_name }}" 
 ansible_pub_key: "{{ ansible_local_ssh_keypath }}/{{ ansible_key_file_name }}.pub"
 ansible_update_setup_user_password: False
 

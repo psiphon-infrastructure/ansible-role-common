@@ -1,6 +1,7 @@
 ---
 # file: roles/ansible-role-common/defaults/main.yaml
 setup_user: user
+setup_ssh_password: "password"
 ansible_new_user: ansible-user
 ansible_new_uid: 999
 ansible_new_user_group: ansible-user

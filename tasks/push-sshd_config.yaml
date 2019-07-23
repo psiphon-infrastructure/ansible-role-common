@@ -15,10 +15,10 @@
 - name: Push sshd_config
   become: true
   template:
-    src="{{ sshd_config_template }}" dest="{{ sshd_config_new_file }}" backup=yes
-
-- name: Check sshd_config
-  command:  "{{ sshd_binary }} -f {{ sshd_config_new_file }}"
+    src: "{{ sshd_config_template }}" 
+    dest: "{{ sshd_config_new_file }}"
+    backup: yes
+    validate: "{{ sshd_binary }} -t -f %s"
   register: sshd_config_test
 
 - debug: 

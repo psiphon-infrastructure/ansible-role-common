@@ -98,7 +98,9 @@ PrintMotd no
 
 # no default banner path
 Banner /etc/banner.info
+{% if ansible_os_family == "Debian" %}
 DebianBanner no
+{% endif %}
 
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*

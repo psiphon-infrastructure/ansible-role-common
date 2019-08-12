@@ -20,6 +20,20 @@
     backup: yes
     validate: "{{ sshd_binary }} -t -f %s"
   register: sshd_config_test
+  when: (ansible_facts['distribution'] == "Debian") or 
+        (ansible_facts['distribution'] == "Ubuntu")
+
+- name: Push (CentOS) sshd_config
+  become: true
+  template:
+    src: "{{ centos_sshd_config_template }}" 
+    dest: "{{ sshd_config_new_file }}"
+    backup: yes
+    validate: "{{ sshd_binary }} -t -f %s"
+  register: sshd_config_test
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+    - ansible_facts['distribution_major_version'] == "7"
 
 - debug: 
     msg: "{{ sshd_config_test }}"

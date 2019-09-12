@@ -12,3 +12,11 @@
 - include: push-sshd_config.yaml
   tags:
     - push_sshd_config
+- include: set-hostname.yaml
+  tags:
+    - set_hostname
+
+- name: Reboot the server
+  reboot:
+  become: true
+  when: set_hostname is defined

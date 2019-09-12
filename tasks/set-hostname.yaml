@@ -1,0 +1,16 @@
+---
+# file: tasks/set-hostname.yaml
+
+- name: Set IP Address and host name in /etc/hosts
+  replace:
+    path: /etc/hosts
+    regexp: "^127.0.[0|1].1[ \t]+{{ current_hostname }}.*"
+    replace: "{{ ip_address }}  {{ hostname_fqdn }}  {{ hostname }}"
+  become: true
+  register: set_hostname
+
+
+- hostname:
+    name: "{{ hostname }}"
+  become: true
+  register: set_hostname

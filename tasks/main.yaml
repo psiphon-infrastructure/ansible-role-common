@@ -21,4 +21,4 @@
 - name: Reboot the server
   reboot:
   become: true
-  when: set_hostname is defined
+  when: set_hostname is changed

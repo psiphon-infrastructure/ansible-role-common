@@ -1,19 +1,20 @@
 ---
 # file: ansible-role-common/tasks/main.yaml
-- include: update-setup-user-password.yaml
-  tags:
-    - update_password
 - include: create-group.yaml
   become: true
+
 - include: create-new-ansible-user.yaml
   become: true
+
 - include: add-ssh-key-auth-file.yaml
   become: true
   tags:
     - push_ssh_key
+
 - include: push-sshd_config.yaml
   tags:
     - push_sshd_config
+
 - include: set-hostname.yaml
   tags:
     - set_hostname

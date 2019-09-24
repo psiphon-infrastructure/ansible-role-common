@@ -18,8 +18,12 @@
 - include: set-hostname.yaml
   tags:
     - set_hostname
+    - never
 
 - name: Reboot the server
   reboot:
   become: true
   when: set_hostname is changed
+  tags:
+    - set_hostname
+    - never

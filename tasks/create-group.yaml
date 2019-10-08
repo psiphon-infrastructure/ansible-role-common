@@ -5,3 +5,4 @@
     name: "{{ ansible_new_user_group }}"
     gid: "{{ ansible_new_gid }}"
     state: present
+  ignore_errors: true
